@@ -32,7 +32,7 @@ public class ProductoViewModel extends AndroidViewModel {
     public LiveData<List<Productos>> findAllProductos(){
         return productoDAO.findAll();
     }
-    public LiveData<Productos> findById(int id){
+    public LiveData<Productos> findById(Long id){
         return productoDAO.findById(id);
     }
 

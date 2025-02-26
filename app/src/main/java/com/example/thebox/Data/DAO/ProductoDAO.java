@@ -1,7 +1,6 @@
 package com.example.thebox.Data.DAO;
 import androidx.lifecycle.LiveData;
 import androidx.room.*;
-import androidx.room.Query;
 
 import com.example.thebox.Data.Model.Productos;
 

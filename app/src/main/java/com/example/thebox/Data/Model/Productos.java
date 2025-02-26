@@ -1,8 +1,6 @@
 package com.example.thebox.Data.Model;
 
-import androidx.annotation.NonNull;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import androidx.room.*;
 
 @Entity(tableName = "producto")
 public class Productos {
