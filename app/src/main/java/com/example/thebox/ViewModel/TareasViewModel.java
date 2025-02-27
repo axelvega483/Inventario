@@ -9,7 +9,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.thebox.Data.DAO.TareasDAO;
 import com.example.thebox.Data.Database.DatabaseApp;
-import com.example.thebox.Data.Model.Tareas;
+import com.example.thebox.Data.Model.Tarea;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -30,16 +30,16 @@ public class TareasViewModel extends AndroidViewModel {
         executorService.shutdown();
     }
 
-    public LiveData<List<Tareas>> findAllTareas() {
+    public LiveData<List<Tarea>> findAllTareas() {
         return tareasDAO.findAll();
     }
 
-    public LiveData<Tareas> findById(Long id) {
+    public LiveData<Tarea> findById(Long id) {
         return tareasDAO.findById(id);
     }
 
 
-    public void save(Tareas tarea) {
+    public void save(Tarea tarea) {
         executorService.execute(() -> {
             try {
                 tareasDAO.save(tarea);
@@ -49,7 +49,7 @@ public class TareasViewModel extends AndroidViewModel {
         });
     }
 
-    public void update(Tareas tarea) {
+    public void update(Tarea tarea) {
         executorService.execute(() -> {
             try {
                 tareasDAO.update(tarea);
@@ -59,7 +59,7 @@ public class TareasViewModel extends AndroidViewModel {
         });
     }
 
-    public void delete(Tareas tarea) {
+    public void delete(Tarea tarea) {
         executorService.execute(() -> {
             try {
                 tareasDAO.delete(tarea);

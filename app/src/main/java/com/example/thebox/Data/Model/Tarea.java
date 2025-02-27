@@ -3,13 +3,13 @@ package com.example.thebox.Data.Model;
 import androidx.room.*;
 
 @Entity(tableName = "tarea")
-public class Tareas {
+public class Tarea {
     @PrimaryKey(autoGenerate = true)
     private Long id;
     private String titulo;
     private String descripcion;
 
-    public Tareas(String titulo, String descripcion) {
+    public Tarea(String titulo, String descripcion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
     }

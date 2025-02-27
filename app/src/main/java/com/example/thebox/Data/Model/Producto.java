@@ -2,8 +2,12 @@ package com.example.thebox.Data.Model;
 
 import androidx.room.*;
 
-@Entity(tableName = "producto")
-public class Productos {
+@Entity(tableName = "producto",
+        foreignKeys = @ForeignKey(entity = Categoria.class,
+                parentColumns = "id",
+                childColumns = "categoriaId",
+                onDelete = ForeignKey.CASCADE))
+public class Producto {
     @PrimaryKey(autoGenerate = true)
     private Long id;
 
@@ -11,13 +15,14 @@ public class Productos {
     private String descripcion;
     private int cantidad;
     private String imgUri;
+    private Long categoriaId;
 
-
-    public Productos(String nombre, String descripcion, int cantidad, String imgUri) {
+    public Producto(String nombre, String descripcion, int cantidad, String imgUri, Long categoriaId) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.imgUri = imgUri;
+        this.categoriaId = categoriaId;
     }
 
     public Long getId() {
@@ -58,5 +63,13 @@ public class Productos {
 
     public void setImgUri(String imgUri) {
         this.imgUri = imgUri;
+    }
+
+    public Long getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
     }
 }
