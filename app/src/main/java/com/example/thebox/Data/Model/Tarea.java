@@ -8,10 +8,15 @@ public class Tarea {
     private Long id;
     private String titulo;
     private String descripcion;
+    private String imgUri;
 
-    public Tarea(String titulo, String descripcion) {
+    public Tarea() {
+    }
+
+    public Tarea(String titulo, String descripcion, String imgUri) {
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.imgUri = imgUri;
     }
 
     public Long getId() {
@@ -36,5 +41,13 @@ public class Tarea {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getImgUri() {
+        return imgUri;
+    }
+
+    public void setImgUri(String imgUri) {
+        this.imgUri = imgUri;
     }
 }

@@ -9,15 +9,19 @@ import androidx.fragment.app.Fragment;
 
 import com.example.thebox.R;
 import com.example.thebox.View.Fragment.TareaFragment;
-import com.example.thebox.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-private ActivityMainBinding binding;
+private BottomNavigationView btnNav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
+        setContentView(R.layout.activity_main);
+
         init();
         initlisteners();
         if(savedInstanceState == null) {
@@ -26,12 +30,11 @@ private ActivityMainBinding binding;
 
     }
     private void init() {
-        binding= ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        btnNav = findViewById(R.id.btnNav);
     }
 
     private void initlisteners() {
-        binding.btnNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        btnNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();

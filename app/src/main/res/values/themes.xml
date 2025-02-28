@@ -12,5 +12,6 @@
         <item name="cornerSize">50%</item>
         <item name="cornerFamily">rounded</item>
     </style>
+
     <style name="Theme.TheBox" parent="Base.Theme.TheBox" />
 </resources>
