@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".View.Fragment.Add_Tareas_Fragment">
+    tools:context=".View.Fragment.TareaDetalleFragment">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginTop="20dp"
-            android:text="Nueva Tarea"
+            android:text="Tarea Detalle"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -36,70 +37,76 @@
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <ImageView
-            android:id="@+id/imgTarea"
+            android:id="@+id/imgDetalleTarea"
             android:layout_width="300dp"
             android:layout_height="250dp"
             android:layout_marginTop="80dp"
-            android:background="@color/lightwhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintVertical_bias="0.0"
+            android:background="@color/lightwhite"/>
+
 
         <TextView
-            android:id="@+id/photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/baseline_add_a_photo_24"
-            app:layout_constraintBottom_toBottomOf="@+id/imgTarea"
-            app:layout_constraintStart_toEndOf="@+id/imgTarea"
-            app:layout_constraintTop_toTopOf="@+id/imgTarea"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <EditText
-            android:id="@+id/tituloTxt"
+            android:id="@+id/tituloDetalleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
             android:ems="10"
-            android:hint="Titulo"
-            android:inputType="text"
+            android:text="Titulo"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.079"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgTarea" />
+            app:layout_constraintTop_toBottomOf="@+id/imgDetalleTarea" />
 
-        <EditText
-            android:id="@+id/descTxt"
+        <TextView
+            android:id="@+id/descDetalleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="10dp"
             android:ems="10"
-            android:hint="Descripcion"
-            android:inputType="text"
+            android:text="Descripcion"
+            android:textSize="20sp"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.079"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tituloTxt" />
+            app:layout_constraintTop_toBottomOf="@+id/tituloDetalleTxt" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/addTareaBtn"
+            android:id="@+id/editTareaBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="80dp"
             android:background="@drawable/brown_bg"
-            android:text="Guardar"
+            android:text="Editar"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.281"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descTxt" />
+            app:layout_constraintTop_toBottomOf="@+id/descDetalleTxt" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/deleteTareaBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/brown_bg"
+            android:text="Eliminar"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.826"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descDetalleTxt" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

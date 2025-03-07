@@ -23,12 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Vista separadora o decorativa -->
-
-        <!-- Lista de Tareas con separación entre ítems -->
-
-
-        <!-- Botón para agregar nuevas tareas -->
 
         <View
             android:id="@+id/view"

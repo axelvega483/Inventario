@@ -11,9 +11,14 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+
 import com.bumptech.glide.Glide;
 import com.example.thebox.Data.Model.Tarea;
 import com.example.thebox.R;
+import com.example.thebox.View.Fragment.TareaDetalleFragment;
 import com.example.thebox.ViewModel.TareasViewModel;
 
 import java.util.ArrayList;
@@ -57,6 +62,7 @@ public class TareasAdapter extends BaseAdapter {
             holder.titulo = convertView.findViewById(R.id.tituloTxt);
             holder.descripcion = convertView.findViewById(R.id.descTxt);
             holder.img = convertView.findViewById(R.id.imgTarea);
+            holder.cardtarea = convertView.findViewById(R.id.cardtarea);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -74,6 +80,17 @@ public class TareasAdapter extends BaseAdapter {
                     .load(tarea.getImgUri())
                     .into(holder.img);
         }
+        holder.cardtarea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.frameContainer, TareaDetalleFragment.newInstance(tarea.getId().toString()))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
 
 
         return convertView;
@@ -83,6 +100,7 @@ public class TareasAdapter extends BaseAdapter {
         TextView titulo;
         TextView descripcion;
         ImageView img;
+        CardView cardtarea;
     }
     public void updateList(List<Tarea> newTareas) {
 

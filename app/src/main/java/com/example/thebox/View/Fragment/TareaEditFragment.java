@@ -13,32 +13,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.thebox.Data.Model.Tarea;
 import com.example.thebox.R;
 import com.example.thebox.ViewModel.TareasViewModel;
 
 
-public class Add_Tareas_Fragment extends Fragment {
-
-    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
-    private TareasViewModel viewModelTarea;
-    private String imgUri;
-    private TextView photo, tituloTxt, descTxt;
+public class TareaEditFragment extends Fragment {
+    private TareasViewModel tareasViewModel;
+    private Tarea tarea;
+    private EditText tituloTxt, descTxt;
+    private TextView photo;
     private ImageView imgTarea;
-    private Button addTareaBtn;
+    private Button saveEditTareaBtn;
+    private ActivityResultLauncher<PickVisualMediaRequest> pickMedia;
+    private String imgUri;
 
-    public Add_Tareas_Fragment() {
+    public TareaEditFragment() {
         // Required empty public constructor
     }
 
-
-    public static Add_Tareas_Fragment newInstance() {
-        Add_Tareas_Fragment fragment = new Add_Tareas_Fragment();
+    public static TareaEditFragment newInstance(String id) {
+        TareaEditFragment fragment = new TareaEditFragment();
         Bundle args = new Bundle();
+        args.putString("id", id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,21 +53,30 @@ public class Add_Tareas_Fragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.add_tareas_fragment, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_tarea_edit, container, false);
         init(rootView);
+        if (getArguments() != null) {
+            tareasViewModel.findById(Long.valueOf(getArguments().getString("id").toString())).observe(getViewLifecycleOwner(), tarea -> {
+                this.tarea = tarea;
+                setarDatos();
+            });
+        }
         initListeners();
+
+
         return rootView;
     }
 
-
     private void init(View rootView) {
-        photo = rootView.findViewById(R.id.photo);
-        imgTarea = rootView.findViewById(R.id.imgTarea);
-        addTareaBtn = rootView.findViewById(R.id.addTareaBtn);
+        tareasViewModel = new ViewModelProvider(requireActivity()).get(TareasViewModel.class);
         tituloTxt = rootView.findViewById(R.id.tituloTxt);
         descTxt = rootView.findViewById(R.id.descTxt);
-        viewModelTarea = new ViewModelProvider(this).get(TareasViewModel.class);
+        imgTarea = rootView.findViewById(R.id.imgTarea);
+        photo = rootView.findViewById(R.id.photo);
+        saveEditTareaBtn = rootView.findViewById(R.id.saveEditTareaBtn);
+
     }
 
     private void initListeners() {
@@ -77,26 +89,37 @@ public class Add_Tareas_Fragment extends Fragment {
             }
         });
 
-        addTareaBtn.setOnClickListener(new View.OnClickListener() {
+
+        saveEditTareaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (tarea != null) {
+                    // Asegúrate de actualizar los campos de la tarea antes de llamar al ViewModel
+                    tarea.setTitulo(tituloTxt.getText().toString());
+                    tarea.setDescripcion(descTxt.getText().toString());
+                    tarea.setImgUri(imgUri);
 
-                String titulo = tituloTxt.getText().toString();
-                String descripcion = descTxt.getText().toString();
-                Log.d("Tarea", "Título: " + titulo + ", Descripción: " + descripcion);  // Añadir log para ver los datos
-
-                Tarea tarea = new Tarea();
-                tarea.setTitulo(titulo);
-                tarea.setDescripcion(descripcion);
-                tarea.setImgUri(imgUri);
-
-                // Agregar la tarea al ViewModel
-                viewModelTarea.save(tarea);
-                Toast.makeText(getActivity(), "Tarea guardada", Toast.LENGTH_SHORT).show();
-                getActivity().getSupportFragmentManager().popBackStack();
+                    tareasViewModel.update(tarea);
+                    Toast.makeText(getActivity(), "Tarea actualizada", Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
             }
         });
     }
+
+    public void setarDatos() {
+        if (tarea != null) {
+            tituloTxt.setText(tarea.getTitulo());
+            descTxt.setText(tarea.getDescripcion());
+            Glide.with(this).load(tarea.getImgUri()).into(imgTarea);
+        }
+        if (tarea != null) {
+            tarea.setTitulo(tituloTxt.getText().toString());
+            tarea.setDescripcion(descTxt.getText().toString());
+            tarea.setImgUri(imgUri); // Usar imgUri actualizado
+        }
+    }
+
 
     public void cargarImg() {
         // Registrar el ActivityResultLauncher para manejar la selección de imágenes o videos
@@ -111,5 +134,4 @@ public class Add_Tareas_Fragment extends Fragment {
             }
         });
     }
-
 }
