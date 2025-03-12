@@ -97,7 +97,9 @@ public class TareaEditFragment extends Fragment {
                     // Asegúrate de actualizar los campos de la tarea antes de llamar al ViewModel
                     tarea.setTitulo(tituloTxt.getText().toString());
                     tarea.setDescripcion(descTxt.getText().toString());
-                    tarea.setImgUri(imgUri);
+                    if (imgUri != null && !imgUri.isEmpty()) {
+                        tarea.setImgUri(imgUri);
+                    }
 
                     tareasViewModel.update(tarea);
                     Toast.makeText(getActivity(), "Tarea actualizada", Toast.LENGTH_SHORT).show();
@@ -111,7 +113,10 @@ public class TareaEditFragment extends Fragment {
         if (tarea != null) {
             tituloTxt.setText(tarea.getTitulo());
             descTxt.setText(tarea.getDescripcion());
-            Glide.with(this).load(tarea.getImgUri()).into(imgTarea);
+            imgUri = tarea.getImgUri();  // Recupera el URI original de la tarea
+            if (imgUri != null && !imgUri.isEmpty()) {
+                Glide.with(this).load(imgUri).into(imgTarea); // Si existe una imagen, cárgala
+            }
         }
         if (tarea != null) {
             tarea.setTitulo(tituloTxt.getText().toString());
